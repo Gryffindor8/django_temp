@@ -1,0 +1,94 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}
+
+{% endblock title %}
+
+{% block menu %}
+
+<div class="header-navbar navbar-expand-sm navbar navbar-horizontal navbar-fixed navbar-dark navbar-without-dd-arrow navbar-shadow" role="navigation" data-menu="menu-wrapper">
+        <div class="navbar-container main-menu-content" data-menu="menu-container">
+            <ul class="nav navbar-nav" id="main-menu-navigation" data-menu="menu-navigation">
+                <li class="nav-item"><a class="nav-link" href="{% url 'core:file_add' %}"><i class="ft-file-plus"></i><span>Add File</span></a>
+                </li>
+                <li class="nav-item" ><a class="nav-link" href="{% url 'auth:signout' %}"><i class="ft-log-out"></i><span>Logout</span></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+{% endblock menu %}
+
+{% block content %}
+        <div class="content-wrapper">
+            <div class="content-wrapper-before"></div>
+            <div class="content-header row">
+                <div class="content-header-left col-md-4 col-12 mb-2">
+                    <h3 class="content-header-title">Files View</h3>
+                </div>
+                <div class="content-header-right col-md-8 col-12">
+                    <div class="breadcrumbs-top float-md-right">
+                        <div class="breadcrumb-wrapper mr-1">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#}">Home</a>
+                                </li>
+                                <li class="breadcrumb-item"><a href="#">File Search</a>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-body">
+                 <!-- Full calendar advance example section start -->
+              <section class="helpers" id="form-helpers">
+                    <div class="row">
+                        <div class="col-12 mt-3 mb-1">
+                           
+                        </div>
+                    </div>
+                    <div class="row match-height">
+                        <div class="col-lg-8 col-md-8">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Files assigned to me:</h4>
+                                </div>
+                                <div class="card-block">
+                                    <div class="card-body">
+                                    <table class="table table-responsive">
+                                        <thead>
+                                            <tr>
+                                                <th> File Tracking Id </th>
+                                                <th> File Name </th>
+                                                <th> File Created At </th>
+                                                <th> View Details </th>
+                                                <th> Delete? </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for file in files %}
+                                            <tr>
+                                                <td>{{ file.tracking_id }}</td>
+                                                <td>{{ file.file_name }}</td>
+                                                <td>{{ file.created_at }}</td>
+                                                <td><a href="{{ file.get_absolute_url }}">View</a></td>
+                                                <td><a href="{% url 'core:file_delete' file.pk %}"> Irreversible action! </a></td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Helper Classes end -->
+                <!-- // Full calendar advance example section end -->
+            </div>
+        </div>
+    
+
+
+{% endblock content %}
